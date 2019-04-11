@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /**
  * Handles all movement of the player's sprite
@@ -20,7 +21,8 @@ public class PlayerSprite : MonoBehaviour
     {
         //Transform temp = GetComponent<PlayerPointer>();
         //Debug.Log(temp);
-        pointer = GameObject.Find("PlayerPointer").GetComponent<PlayerPointer>();
+        pointer = gameObject.transform.parent.Find("PlayerPointer").GetComponent<PlayerPointer>();
+        gameObject.transform.Find("Canvas/Text").GetComponent<Text>().text = "" + pointer.playerNum;
         rb2d = GetComponent<Rigidbody2D>();
         speed = 2;
     }
@@ -32,5 +34,14 @@ public class PlayerSprite : MonoBehaviour
     {
         float angleRad = pointer.angle * Mathf.PI / 180f; // Convert to radians
         rb2d.velocity = new Vector2(Mathf.Sin(angleRad) * -1, Mathf.Cos(angleRad)) * speed;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Spawnable"))
+        {
+            pointer.AddScore(1);
+            Destroy(other.gameObject);
+        }
     }
 }

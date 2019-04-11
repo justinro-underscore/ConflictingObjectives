@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BackgroundCircle
   - Obstacle
+  - Spawnable
   layers:
   - Default
   - TransparentFX

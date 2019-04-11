@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerPointer : MonoBehaviour
 {
@@ -8,11 +9,13 @@ public class PlayerPointer : MonoBehaviour
     [HideInInspector] public int playerNum;
     [HideInInspector] public float angle = 0; // The angle that the pointer is pointing
                                               //  Up -> 0, Left -> 90, Down -> 180, Right -> 270
-                                          
+
     private Transform playerPointer; // Reference to the pointer that is shown
+    private Text scoreText;
 
     private bool debugWithKeyboard = true; // Runs the controls with the keyboard
     private bool keyboardDebugDebounce = true; // Handles debounce for vertical keys with keyboard input
+    private int score;
 
     /**
      * Sets up the pointer
@@ -20,6 +23,8 @@ public class PlayerPointer : MonoBehaviour
 	void Start ()
     {
         playerPointer = gameObject.transform.Find("Pointer");
+        scoreText = gameObject.transform.parent.Find("Canvas/Score").GetComponent<Text>();
+        score = 0;
     }
 
     /**
@@ -138,5 +143,11 @@ public class PlayerPointer : MonoBehaviour
     private void ApplyEffects()
     {
         // TODO
+    }
+
+    public void AddScore(int num)
+    {
+        score += num;
+        scoreText.text = "Score: " + num;
     }
 }
