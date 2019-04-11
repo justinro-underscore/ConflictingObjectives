@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerPointer : MonoBehaviour
 {
-    [HideInInspector] public float angle; // The angle that the pointer is pointing
-                                          //  Up -> 0, Left -> 90, Down -> 180, Right -> 270
-
-    private Transform truePointer; // Reference to the player's true input
+    public GameObject playerSprite; // Prefab for player sprite
+    [HideInInspector] public int playerNum;
+    [HideInInspector] public float angle = 0; // The angle that the pointer is pointing
+                                              //  Up -> 0, Left -> 90, Down -> 180, Right -> 270
+                                          
     private Transform playerPointer; // Reference to the pointer that is shown
 
-    private bool debugWithKeyboard = false; // Runs the controls with the keyboard
+    private bool debugWithKeyboard = true; // Runs the controls with the keyboard
     private bool keyboardDebugDebounce = true; // Handles debounce for vertical keys with keyboard input
 
     /**
@@ -18,11 +19,57 @@ public class PlayerPointer : MonoBehaviour
      */
 	void Start ()
     {
-        angle = 0;
         playerPointer = gameObject.transform.Find("Pointer");
-        truePointer = gameObject.transform.Find("TruePointer");
+    }
 
-        debugWithKeyboard = !Input.GetJoystickNames()[0].Contains("Controller");
+    /**
+     * Sets up all of the player information
+     * @param playerNum The index of the player
+     * @param debug If true, use debug options
+     * @return True if successful
+     */
+    public bool SetupPlayer(int playerNum, bool debug)
+    {
+        debugWithKeyboard = debug;
+        return SetPlayerNum(playerNum);
+    }
+
+    /**
+     * Sets the player's index
+     * @param num The index of the player
+     * @return True if successful
+     */
+    private bool SetPlayerNum(int num)
+    {
+        // Bounds check
+        if (num < 0 || num > 4)
+            return false;
+
+        // Set the player's index
+        playerNum = num;
+        // Set the sprite's position and the starting angle of the pointer
+        Vector3 spritePos = new Vector3(3f, 1f);
+        switch (num)
+        {
+            case 1:
+                angle = 225;
+                break;
+            case 2:
+                angle = 135;
+                spritePos.x *= -1;
+                break;
+            case 3:
+                angle = 315;
+                spritePos.y *= -1;
+                break;
+            case 4:
+                angle = 45;
+                spritePos.x *= -1;
+                spritePos.y *= -1;
+                break;
+        }
+        Instantiate(playerSprite, gameObject.transform.position + spritePos, Quaternion.identity, gameObject.transform.parent);
+        return true;
     }
 
     /**
@@ -30,8 +77,7 @@ public class PlayerPointer : MonoBehaviour
      */
     void Update ()
     {
-        SetAngle();
-        truePointer.rotation = Quaternion.Euler(0, 0, angle); // Set the true pointer
+        SetAngle(); // Get the angle from the user
         ApplyEffects(); // Then add the effects
         playerPointer.rotation = Quaternion.Euler(0, 0, angle); // Then set the player's pointer
     }
