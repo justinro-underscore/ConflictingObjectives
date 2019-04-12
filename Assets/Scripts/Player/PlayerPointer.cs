@@ -5,13 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerPointer : MonoBehaviour
 {
-    public enum InputType
-    {
-        TRY_HARDS, // Individual controllers
-        TWO_FOR_PRICE_OF_ONE, // Two players to one controller
-        ALL_TOGETHER_NOW, // Everyone on one controller
-        KEYBOARD // Keyboard -- DEBUG ONLY
-    };
     private struct InputStrings
     {
         public string x;
@@ -45,7 +38,7 @@ public class PlayerPointer : MonoBehaviour
      * @param input How the player should be controlling their pointer
      * @return True if successful
      */
-    public bool SetupPlayer(int num, InputType input)
+    public bool SetupPlayer(int num, LevelManager.InputType input)
     {
         // Bounds check
         if (num < 0 || num > 4)
@@ -88,13 +81,13 @@ public class PlayerPointer : MonoBehaviour
         string suffix = "";
         switch (input)
         {
-            case InputType.TRY_HARDS:
+            case LevelManager.InputType.TRY_HARDS:
                 suffix = "MainJoy" + playerNum;
                 break;
-            case InputType.TWO_FOR_PRICE_OF_ONE:
+            case LevelManager.InputType.TWO_FOR_PRICE_OF_ONE:
                 suffix = (playerNum % 2 != 0 ? "MainJoy" : "SndJoy") + ((playerNum + 1) / 2);
                 break;
-            case InputType.ALL_TOGETHER_NOW:
+            case LevelManager.InputType.ALL_TOGETHER_NOW:
                 switch (playerNum)
                 {
                     case 1:
@@ -111,7 +104,8 @@ public class PlayerPointer : MonoBehaviour
                         break;
                 }
                 break;
-            case InputType.KEYBOARD:
+            case LevelManager.InputType.KEYBOARD:
+            default:
                 Debug.Log("You are in debug mode");
                 suffix = "Keyboard";
                 break;

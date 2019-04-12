@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public enum InputType
+    {
+        TRY_HARDS, // Individual controllers
+        TWO_FOR_PRICE_OF_ONE, // Two players to one controller
+        ALL_TOGETHER_NOW, // Everyone on one controller
+        KEYBOARD // Keyboard -- DEBUG ONLY
+    };
+
     public GameObject playerPointer; // Prefab of a player pointer
     public GameObject level; // Prefab of a level
 
@@ -14,7 +22,7 @@ public class LevelManager : MonoBehaviour
     {
         // Check if we have controllers connected
         //  If not, we are in debug mode
-        //  TODO Change
+        //  TODO Remove
         bool debug = true;
         if (Input.GetJoystickNames().Length > 0)
             debug = !Input.GetJoystickNames()[0].Contains("Controller");
@@ -40,7 +48,7 @@ public class LevelManager : MonoBehaviour
                     break;
             }
             GameObject p = Instantiate(playerPointer, pointerPos, Quaternion.identity);
-            p.GetComponentInChildren<PlayerPointer>().SetupPlayer(num, (debug ? PlayerPointer.InputType.KEYBOARD : PlayerPointer.InputType.ALL_TOGETHER_NOW));
+            p.GetComponentInChildren<PlayerPointer>().SetupPlayer(num, (debug ? InputType.KEYBOARD : InputType.TWO_FOR_PRICE_OF_ONE));
         }
 
         // Create the level
