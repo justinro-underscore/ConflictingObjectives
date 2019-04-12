@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
             debug = !Input.GetJoystickNames()[0].Contains("Controller");
 
         // Set up the players
-        int numPlayers = 4; // Number of players, [1,4]
+        int numPlayers = 1; // Number of players, [1,4]
         for (int num = 1; num <= numPlayers; num++)
         {
             Vector3 pointerPos = new Vector3(5.65f, 1.6f);
@@ -44,6 +44,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // Create the level
-        //Instantiate(level);
+        if (GameObject.Find("Level") == null)
+            Instantiate(level);
     }
 }

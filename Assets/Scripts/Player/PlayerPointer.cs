@@ -155,6 +155,6 @@ public class PlayerPointer : MonoBehaviour
     public void AddScore(int num)
     {
         score += num;
-        scoreText.text = "Score: " + num;
+        scoreText.text = "Score: " + score;
     }
 }

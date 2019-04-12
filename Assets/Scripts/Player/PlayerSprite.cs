@@ -19,8 +19,6 @@ public class PlayerSprite : MonoBehaviour
      */
 	void Start ()
     {
-        //Transform temp = GetComponent<PlayerPointer>();
-        //Debug.Log(temp);
         pointer = gameObject.transform.parent.Find("PlayerPointer").GetComponent<PlayerPointer>();
         rb2d = GetComponent<Rigidbody2D>();
         speed = 2;
@@ -35,13 +33,25 @@ public class PlayerSprite : MonoBehaviour
         rb2d.velocity = new Vector2(Mathf.Sin(angleRad) * -1, Mathf.Cos(angleRad)) * speed;
     }
 
+    /**
+     * If the player runs into a spawnable, consume it
+     * @param other The other object it collides with
+     */
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Spawnable"))
         {
-            if (other.gameObject.name == "Coin")
+            if (other.gameObject.name.Contains("Coin"))
                 pointer.AddScore(1);
             Destroy(other.gameObject);
         }
+    }
+
+    /**
+     * @return The player's index
+     */
+    public int GetPlayerNum()
+    {
+        return pointer.playerNum;
     }
 }
