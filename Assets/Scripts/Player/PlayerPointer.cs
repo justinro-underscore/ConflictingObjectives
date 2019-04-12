@@ -52,28 +52,35 @@ public class PlayerPointer : MonoBehaviour
 
         // Set the player's index
         playerNum = num;
-        // Set the sprite's position and the starting angle of the pointer
+        Color playerColor = Color.white;
+        // Set the sprite's position and sets the starting angle and color of the pointer
         Vector3 spritePos = new Vector3(3f, 1f);
         switch (num)
         {
             case 1:
                 angle = 225;
+                playerColor = Color.red;
                 break;
             case 2:
                 angle = 135;
                 spritePos.x *= -1;
+                playerColor = Color.blue;
                 break;
             case 3:
                 angle = 315;
                 spritePos.y *= -1;
+                playerColor = Color.yellow;
                 break;
             case 4:
                 angle = 45;
                 spritePos.x *= -1;
                 spritePos.y *= -1;
+                playerColor = Color.green;
                 break;
         }
-        Instantiate(playerSprite, gameObject.transform.position + spritePos, Quaternion.identity, gameObject.transform.parent);
+        GameObject pSprite = Instantiate(playerSprite, gameObject.transform.position + spritePos, Quaternion.identity, gameObject.transform.parent);
+        pSprite.GetComponent<SpriteRenderer>().color = playerColor;
+        transform.Find("Pointer").GetComponent<SpriteRenderer>().color = playerColor;
         return true;
     }
 
@@ -131,8 +138,8 @@ public class PlayerPointer : MonoBehaviour
      */
     private void SetAngleJoystick()
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
+        float x = Input.GetAxis("Horizontal" + playerNum);
+        float y = Input.GetAxis("Vertical" + playerNum);
         if (Mathf.Abs(x) > 0.1f || Mathf.Abs(y) > 0.1f) // Make sure the user is moving the joystick
             angle = Mathf.Atan2(x * -1, y) * 180f / Mathf.PI;
     }

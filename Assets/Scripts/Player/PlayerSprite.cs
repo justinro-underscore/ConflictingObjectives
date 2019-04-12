@@ -22,7 +22,6 @@ public class PlayerSprite : MonoBehaviour
         //Transform temp = GetComponent<PlayerPointer>();
         //Debug.Log(temp);
         pointer = gameObject.transform.parent.Find("PlayerPointer").GetComponent<PlayerPointer>();
-        gameObject.transform.Find("Canvas/Text").GetComponent<Text>().text = "" + pointer.playerNum;
         rb2d = GetComponent<Rigidbody2D>();
         speed = 2;
     }
@@ -40,7 +39,8 @@ public class PlayerSprite : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Spawnable"))
         {
-            pointer.AddScore(1);
+            if (other.gameObject.name == "Coin")
+                pointer.AddScore(1);
             Destroy(other.gameObject);
         }
     }
