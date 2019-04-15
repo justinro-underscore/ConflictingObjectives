@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 4715308605131200}
   - component: {fileID: 212286565096419170}
   - component: {fileID: 114756357093916930}
+  - component: {fileID: 58457657333091494}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -358,7 +359,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1761766688594986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.88, y: 1.33, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4185405833737370}
@@ -377,6 +378,21 @@ Transform:
   m_Father: {fileID: 4492635265033590}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58457657333091494
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1761766688594986}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6
 --- !u!61 &61005799170702724
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -639,6 +655,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 1329424015281558, guid: 3491ccfaba903af4b8f56dab632bcd19, type: 2}
+  powerOrbPrefab: {fileID: 1641012521268884, guid: 2b0b63939e92b2143a10811e18844eba,
+    type: 2}
 --- !u!212 &212123953943911890
 SpriteRenderer:
   m_ObjectHideFlags: 1

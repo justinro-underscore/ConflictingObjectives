@@ -42,8 +42,14 @@ public class PlayerSprite : MonoBehaviour
         if (other.gameObject.CompareTag("Spawnable"))
         {
             if (other.gameObject.name.Contains("Coin"))
+            {
                 pointer.AddScore(1);
-            Destroy(other.gameObject);
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                pointer.AddPower(other.gameObject);
+            }
         }
     }
 

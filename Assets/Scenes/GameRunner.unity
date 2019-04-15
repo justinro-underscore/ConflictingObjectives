@@ -367,19 +367,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 4715308605131200, guid: 2d1d6a87c416c2f4fa7e2f8b24ae6236, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 4715308605131200, guid: 2d1d6a87c416c2f4fa7e2f8b24ae6236, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 61411653443550806, guid: 2d1d6a87c416c2f4fa7e2f8b24ae6236,
-        type: 2}
-      propertyPath: m_AutoTiling
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d1d6a87c416c2f4fa7e2f8b24ae6236, type: 2}
   m_IsPrefabParent: 0
@@ -513,26 +500,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1358974374}
---- !u!1 &1399647071 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1761766688594986, guid: 2d1d6a87c416c2f4fa7e2f8b24ae6236,
-    type: 2}
-  m_PrefabInternal: {fileID: 596138621}
---- !u!58 &1399647075
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1399647071}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.6
 --- !u!1 &1643731767
 GameObject:
   m_ObjectHideFlags: 0

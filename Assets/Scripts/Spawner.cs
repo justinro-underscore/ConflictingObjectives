@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    private const int MAX_ITEMS = 10;
-
     public GameObject coinPrefab; // Prefab for a coin
+    public GameObject powerOrbPrefab; // Prefab for a power orb
     
     private int playersInRange = 0; // Counts how many players are in range at one time
 
@@ -15,7 +14,7 @@ public class Spawner : MonoBehaviour
      */
 	void Start ()
     {
-        Invoke("SpawnSpawnable", Random.Range(0f, 2f));
+        Invoke("SpawnSpawnable", Random.Range(0f, 1f));
     }
 
     /**
@@ -46,12 +45,43 @@ public class Spawner : MonoBehaviour
         // Check if can spawn
         if(playersInRange == 0 &&
            gameObject.transform.childCount == 0 &&
-           GameObject.FindGameObjectsWithTag("Spawnable").Length < MAX_ITEMS)
+           GameObject.FindGameObjectsWithTag("Spawnable").Length < LevelManager.MAX_ITEMS_ON_BOARD)
         {
-            Instantiate(coinPrefab, gameObject.transform);
+            int rand = (int)Random.Range(0, 100);
+            if(rand < Constants.PERCENTAGE_COIN)
+                Instantiate(coinPrefab, gameObject.transform);
+            else
+                AddOrbToBoard();
             Invoke("SpawnSpawnable", Random.Range(3f, 6f));
         }
         else
             Invoke("SpawnSpawnable", Random.Range(1f, 4f));
+    }
+
+    /**
+     * Tries to add an orb to the board
+     */
+    private void AddOrbToBoard()
+    {
+        int index = LevelManager.instance.GetNextPowerOrbIndex();
+        if (index < 0) // If we get negative, we cannot add an orb to the board
+            Instantiate(coinPrefab, gameObject.transform);
+        else
+        {
+            // Create the power orb
+            GameObject powerOrb = Instantiate(powerOrbPrefab, gameObject.transform);
+            switch (index)
+            {
+                case 0:
+                    powerOrb.AddComponent<POMirror>();
+                    break;
+                case 1:
+                    powerOrb.AddComponent<POClock>();
+                    break;
+                default:
+                    Debug.Log("ERROR: Power orb not implemented: " + index);
+                    break;
+            }
+        }
     }
 }
