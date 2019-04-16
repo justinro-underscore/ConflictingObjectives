@@ -9,7 +9,7 @@ public abstract class PowerOrb : MonoBehaviour
     protected PlayerPointer pointer = null; // Reference to the player pointer that has this effect
 
     private Image timer; // Shows how much time is left on this power orb
-    private const int EXPIRATION_TIME_SEC = 5; // Defines how long an orb lasts in seconds
+    private const int EXPIRATION_TIME_SEC = 20; // Defines how long an orb lasts in seconds
     private const int TIMER_STEP = 4; // The amount of steps per second the timer runs
     private int timeRemaining; // How much time is remaining for this orb
 
@@ -40,6 +40,8 @@ public abstract class PowerOrb : MonoBehaviour
         pointer = p;
         timer = gameObject.GetComponentInChildren<Canvas>().GetComponentInChildren<Image>();
 
+        StartOrb();
+
         // Start the timer
         timeRemaining = TIMER_STEP * EXPIRATION_TIME_SEC;
         timer.fillAmount = 1;
@@ -58,9 +60,19 @@ public abstract class PowerOrb : MonoBehaviour
     }
 
     /**
+     * Defines what should happen when the orb is started
+     */
+    public virtual void StartOrb() { }
+
+    /**
      * Defines what effect should be applied to the player
      */
-    public abstract void ApplyEffect();
+    public virtual void ApplyEffect() { }
+
+    /**
+     * Defines what should happen when the orb is destroyed
+     */
+    public virtual void EndOrb() { }
 
     /**
      * Name of the script being run. Used for comparisons

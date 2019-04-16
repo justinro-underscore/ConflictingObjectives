@@ -78,8 +78,21 @@ public class Spawner : MonoBehaviour
                 case 1:
                     powerOrb.AddComponent<POClock>();
                     break;
+                case 2:
+                    powerOrb.AddComponent<POFlip>();
+                    break;
+                case 3:
+                    powerOrb.AddComponent<POSlug>();
+                    break;
+                case 4:
+                    powerOrb.AddComponent<POArcade>();
+                    break;
+                case 5:
+                    powerOrb.AddComponent<POStopSign>();
+                    break;
                 default:
                     Debug.Log("ERROR: Power orb not implemented: " + index);
+                    Destroy(powerOrb);
                     break;
             }
         }

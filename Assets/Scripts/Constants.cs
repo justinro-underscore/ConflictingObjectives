@@ -14,6 +14,10 @@ public class Constants
     {
         "POMirror",
         "POClock",
+        "POFlip",
+        "POSlug",
+        "POArcade",
+        "POStopSign",
     };
 
     // Percentage of spawnables -> SHOULD ADD TO 100

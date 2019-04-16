@@ -39,9 +39,6 @@ GameObject:
   - component: {fileID: 4089600370622386}
   - component: {fileID: 212960075409486164}
   - component: {fileID: 58968609509141354}
-  - component: {fileID: 114703638531483062}
-  - component: {fileID: 114032390554021168}
-  - component: {fileID: 114788293858398128}
   m_Layer: 0
   m_Name: PowerOrb
   m_TagString: Spawnable
@@ -116,17 +113,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114032390554021168
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1641012521268884}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5dbec63307d7074f870c46b0cb6111d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114196030624381660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,28 +156,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114703638531483062
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1641012521268884}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25bdbe2809c2b1248baa1c5b774d31ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114788293858398128
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1641012521268884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 642b378c5f5348c47a541203427e8710, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212960075409486164
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -13,11 +13,12 @@ public class PlayerPointer : MonoBehaviour
 
     public GameObject playerSprite; // Prefab for player sprite
     [HideInInspector] public int playerNum;
+    [HideInInspector] public Transform playerPointer; // Reference to the pointer that is shown
     [HideInInspector] public float angle = 0; // The angle that the pointer is pointing
                                               //  Up -> 0, Left -> 90, Down -> 180, Right -> 270
-    private float lastAngle = 0; // Keeps track of the last angle user input
+    private float trueLastAngle = 0; // Keeps track of the last angle user input pre-effects
 
-    private Transform playerPointer; // Reference to the pointer that is shown
+    private Transform debugPointer;
     private Text scoreText;
 
     private List<PowerOrb> effects; // List of effects the user is suffering from
@@ -32,6 +33,7 @@ public class PlayerPointer : MonoBehaviour
 	void Start ()
     {
         playerPointer = gameObject.transform.Find("Pointer");
+        debugPointer = gameObject.transform.Find("DebugPointer");
         effects = new List<PowerOrb>();
         scoreText = gameObject.transform.parent.Find("Canvas/Score").GetComponent<Text>();
         score = 0;
@@ -77,7 +79,7 @@ public class PlayerPointer : MonoBehaviour
                 playerColor = Color.green;
                 break;
         }
-        lastAngle = angle;
+        trueLastAngle = angle;
         GameObject pSprite = Instantiate(playerSprite, gameObject.transform.position + spritePos, Quaternion.identity, gameObject.transform.parent);
         pSprite.GetComponent<SpriteRenderer>().color = playerColor;
         transform.Find("Pointer").GetComponent<SpriteRenderer>().color = playerColor;
@@ -141,13 +143,22 @@ public class PlayerPointer : MonoBehaviour
         if (Mathf.Abs(x) > 0.1f || Mathf.Abs(y) > 0.1f) // Make sure the user is moving the joystick
         {
             angle = Mathf.Atan2(x * -1, y) * 180f / Mathf.PI;
-            lastAngle = angle;
+            trueLastAngle = angle;
+            if(debugPointer != null)
+                debugPointer.rotation = Quaternion.Euler(0, 0, angle);
         }
         else
-            angle = lastAngle;
+            angle = trueLastAngle;
         ApplyEffects(); // Add the effects
 
-        // Bounds check
+        AngleBoundsCheck();
+    }
+
+    /**
+     * Checks the bounds of the angle
+     */
+    public void AngleBoundsCheck()
+    {
         if (angle < 0)
             angle += 360;
         else if (angle >= 360)
@@ -232,11 +243,12 @@ public class PlayerPointer : MonoBehaviour
     public void RemovePower(PowerOrb p)
     {
         // Get rid of power orb
+        p.EndOrb();
         effects.Remove(p);
         Destroy(p.gameObject);
         UpdateEffectsUI();
 
-        angle = lastAngle; // Reset angle
+        angle = trueLastAngle; // Reset angle
         ApplyEffects(); // Apply any remaining effects
         playerPointer.rotation = Quaternion.Euler(0, 0, angle); // Then set the player's pointer
     }
