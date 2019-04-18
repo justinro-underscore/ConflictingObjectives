@@ -90,6 +90,15 @@ public class Spawner : MonoBehaviour
                 case 5:
                     powerOrb.AddComponent<POStopSign>();
                     break;
+                case 6:
+                    powerOrb.AddComponent<PODistraction>();
+                    break;
+                case 7:
+                    powerOrb.AddComponent<POEndToEnd>();
+                    break;
+                case 8:
+                    powerOrb.AddComponent<POSteeringWheel>();
+                    break;
                 default:
                     Debug.Log("ERROR: Power orb not implemented: " + index);
                     Destroy(powerOrb);

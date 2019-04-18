@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class PlayerPointer : MonoBehaviour
 {
-    private struct InputStrings
+    [HideInInspector] public struct InputStrings
     {
         public string x;
         public string y;
     }
+    [HideInInspector] public InputStrings inputStrings;
 
     public GameObject playerSprite; // Prefab for player sprite
     [HideInInspector] public int playerNum;
@@ -24,7 +25,6 @@ public class PlayerPointer : MonoBehaviour
     private List<PowerOrb> effects; // List of effects the user is suffering from
     private const int MAX_EFFECTS = 4; // The max amount of effects the user can be suffering from
 
-    private InputStrings inputStrings;
     private int score;
 
     /**
@@ -197,7 +197,7 @@ public class PlayerPointer : MonoBehaviour
 
         // Add the power orb
         p.SetPlayer(this);
-        effects.Add(p);
+        effects.Insert(0, p);
         orb.transform.parent = transform;
         orb.transform.localScale *= 2;
         UpdateEffectsUI();
@@ -232,7 +232,23 @@ public class PlayerPointer : MonoBehaviour
     {
         for(int i = 0; i < effects.Count; i++)
         {
-            effects[i].gameObject.transform.position = transform.position + new Vector3((i - 2) / 2f, 2);
+            Vector3 offset = new Vector3(-1, 1);
+            switch (i)
+            {
+                case 0:
+                    break;
+                case 1:
+                    offset.x *= -1;
+                    break;
+                case 2:
+                    offset.y *= -1;
+                    break;
+                case 3:
+                    offset.x *= -1;
+                    offset.y *= -1;
+                    break;
+            }
+            effects[i].gameObject.transform.position = transform.position + offset;
         }
     }
 

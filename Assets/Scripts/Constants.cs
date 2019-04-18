@@ -18,6 +18,9 @@ public class Constants
         "POSlug",
         "POArcade",
         "POStopSign",
+        "PODistraction",
+        "POEndToEnd",
+        "POSteeringWheel",
     };
 
     // Percentage of spawnables -> SHOULD ADD TO 100

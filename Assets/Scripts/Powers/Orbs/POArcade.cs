@@ -19,15 +19,15 @@ public class POArcade : PowerOrb
     public void ApplyEffect()
     {
         pointer.AngleBoundsCheck();
-        
-        if (pointer.angle >= 45 && pointer.angle < 135)
+
+        if (pointer.angle >= 315 || pointer.angle < 45)
+            pointer.angle = 0;
+        else if (pointer.angle < 135)
             pointer.angle = 90;
         else if (pointer.angle < 225)
             pointer.angle = 180;
-        else if (pointer.angle < 315)
-            pointer.angle = 270;
         else
-            pointer.angle = 0;
+            pointer.angle = 270;
     }
 
     override
